@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { Item } from './item.model';
 import { ItemStatus } from './item-status.enum';
+import { timeStamp } from 'console';
 
 @Controller('items')
 export class ItemsController {
@@ -33,5 +34,10 @@ export class ItemsController {
     };
 
     return this.itemsService.create(item);
+  }
+
+  @Patch(':id')
+  updateStatus(@Param('id') id: string): Item | undefined {
+    return this.itemsService.updateStatus(id);
   }
 }
